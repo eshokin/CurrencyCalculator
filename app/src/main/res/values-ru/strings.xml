@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Валютный калькулятор</string>
+
+    <string name="russian_ruble">Российский рубль</string>
+    <string name="ok_button">ОК</string>
+    <string name="cancel_button">Отмена</string>
+    <string name="error">Ошибка</string>
+    <string name="warning">Внимание</string>
+
+    <string name="activity_splash_loader">Загрузка данных с www.cbr.ru</string>
+    <string name="activity_splash_date_successfully_update">Данные успешно обновлены</string>
+    <string name="activity_splash_date_not_update">Данные не были обновлены</string>
+
+    <string name="activity_main_calculate">Рассчитать</string>
+    <string name="activity_main_error_sum_null">Укажите сумму</string>
+    <string name="activity_main_error_invalid_input_format">Неверный формат ввода</string>
+    <string name="activity_main_error_empty_input_currency">Отсутствуют данные о валюте, которую хотите продать.</string>
+    <string name="activity_main_error_empty_output_currency">Отсутствуют данные о валюте, которую хотите купить.</string>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Currency calculator</string>
+
+    <string name="russian_ruble">Russian ruble</string>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="error">Error</string>
+    <string name="warning">Warning</string>
+
+    <string name="activity_splash_loader">Loading data with www.cbr.ru</string>
+    <string name="activity_splash_date_successfully_update">Data successfully updated</string>
+    <string name="activity_splash_date_not_update">Data was not updated</string>
+
+    <string name="activity_main_calculate">Calculate</string>
+    <string name="activity_main_error_sum_null">Enter amount</string>
+    <string name="activity_main_error_invalid_input_format">Invalid input format</string>
+    <string name="activity_main_error_empty_input_currency">There are no data about the currency you want to sell.</string>
+    <string name="activity_main_error_empty_output_currency">There are no data on the currency you want to buy.</string>
+
+</resources>

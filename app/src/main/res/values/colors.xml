@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="activity_main_status_bar_color">#33000000</color>
+    <color name="main_color">#54a239</color>
+    <color name="button_pressed_color">#407b2b</color>
+    <color name="background_color">#0D000000</color>
+</resources>
