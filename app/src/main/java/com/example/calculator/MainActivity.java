@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     private Button mCalculateButton;
     private ValuteAdapter mInputCurrencyAdapter, mOutputCurrencyAdapter;
     private MainPresenter presenter;
-
+    private AlertDialog mDialog;
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -104,8 +104,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     protected void onStop() {
         super.onStop();
 
+        closeDialog();
         presenter.unbindView();
     }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -113,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         PresenterManager.getInstance().savePresenter(presenter, outState);
     }
-
 
     private void calculate() {
 
@@ -136,8 +137,21 @@ public class MainActivity extends AppCompatActivity implements MainView {
             return;
         }
 
-        Valute inputValute = mInputCurrencyAdapter.getItem(mInputCurrency.getSelectedItemPosition());
-        Valute outputValute = mOutputCurrencyAdapter.getItem(mOutputCurrency.getSelectedItemPosition());
+        int inputCurrencySelectPosition = mInputCurrency.getSelectedItemPosition();
+        int outputCurrencySelectPosition = mOutputCurrency.getSelectedItemPosition();
+
+        if (inputCurrencySelectPosition < 0 || inputCurrencySelectPosition >= mInputCurrencyAdapter.getCount()) {
+            showErrorDialog(getString(R.string.activity_main_error_empty_input_currency));
+            return;
+        }
+
+        if (outputCurrencySelectPosition < 0 && outputCurrencySelectPosition >= mOutputCurrencyAdapter.getCount()) {
+            showErrorDialog(getString(R.string.activity_main_error_empty_input_currency));
+            return;
+        }
+
+        Valute inputValute = mInputCurrencyAdapter.getItem(inputCurrencySelectPosition);
+        Valute outputValute = mOutputCurrencyAdapter.getItem(outputCurrencySelectPosition);
 
         Double inputValuteValue = 0d;
         Integer inputValuteNominal = 0;
@@ -176,11 +190,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
         presenter.calculateExchange(sum, inputValuteValue, inputValuteNominal, outputValuteValue, outputValuteNominal);
     }
 
-
     @Override
     public void showLoading(boolean show) {
         mProgressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        mCalculateButton.setEnabled(!show);
     }
 
     @Override
@@ -189,14 +201,23 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
+    public void showInput(boolean show) {
+        mInputSum.setFocusable(show);
+        mCalculateButton.setEnabled(show);
+    }
+
+    @Override
     public void showValutes(List<Valute> valutes) {
 
+        if (mInputCurrencyAdapter == null) {
+            mInputCurrencyAdapter = new ValuteAdapter(this, valutes);
+            mInputCurrency.setAdapter(mInputCurrencyAdapter);
+        }
 
-        mInputCurrencyAdapter = new ValuteAdapter(this, valutes);
-        mOutputCurrencyAdapter = new ValuteAdapter(this, valutes);
-
-        mInputCurrency.setAdapter(mInputCurrencyAdapter);
-        mOutputCurrency.setAdapter(mOutputCurrencyAdapter);
+        if (mOutputCurrencyAdapter == null) {
+            mOutputCurrencyAdapter = new ValuteAdapter(this, valutes);
+            mOutputCurrency.setAdapter(mOutputCurrencyAdapter);
+        }
     }
 
     @Override
@@ -204,7 +225,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
         mOutputSum.setText(exchange);
     }
 
-    public void hideKeyboard() {
+
+    private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getWindow().getDecorView().getRootView().getWindowToken(), 0);
     }
@@ -213,7 +235,14 @@ public class MainActivity extends AppCompatActivity implements MainView {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.error);
         builder.setMessage(message);
-        builder.setPositiveButton(R.string.ok_button, null)
-                .show();
+        builder.setPositiveButton(R.string.ok_button, null);
+        mDialog = builder.create();
+        mDialog.show();
+    }
+
+    private void closeDialog() {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
     }
 }

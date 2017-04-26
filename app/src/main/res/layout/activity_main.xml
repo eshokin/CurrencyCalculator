@@ -96,6 +96,7 @@
                 android:layout_height="56dp"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/button_shape"
+                android:enabled="false"
                 android:text="@string/activity_main_calculate"
                 android:textAllCaps="true"
                 android:textAppearance="@style/DefaultMediumTextStyle"

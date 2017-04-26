@@ -11,6 +11,8 @@ public interface MainView {
 
     public void showNoData();
 
+    public void showInput(boolean show);
+
     public void showValutes(List<Valute> valutes);
 
     public void showExchange(String exchange);

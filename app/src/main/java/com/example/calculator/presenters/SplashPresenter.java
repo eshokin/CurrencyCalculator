@@ -20,8 +20,10 @@ public class SplashPresenter extends BasePresenter<List<Valute>, SplashView> {
 
     @Override
     protected void updateView() {
-        view().showProcessUpdate(model.size() == 0 ? R.string.activity_splash_date_not_update : R.string.activity_splash_date_successfully_update);
-        view().startMain();
+        if (!isLoading) {
+            view().showProcessUpdate(model != null && model.size() > 0 ? R.string.activity_splash_date_successfully_update : R.string.activity_splash_date_not_update);
+            view().startMain();
+        }
     }
 
     @Override

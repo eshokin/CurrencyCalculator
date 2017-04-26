@@ -15,12 +15,20 @@ import java.util.List;
 
 public class MainPresenter extends BasePresenter<List<Valute>, MainView> {
 
+    private boolean showNoDataDialog = true;
+
     @Override
     protected void updateView() {
-        if (model.size() == 0) {
-            view().showNoData();
-        } else {
+        if (model != null && model.size() > 0) {
             view().showValutes(model);
+            view().showInput(true);
+            showNoDataDialog = true;
+        } else {
+            view().showInput(false);
+            if (showNoDataDialog) {
+                view().showNoData();
+                showNoDataDialog = false;
+            }
         }
     }
 
