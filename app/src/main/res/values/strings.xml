@@ -17,5 +17,5 @@
     <string name="activity_main_error_invalid_input_format">Invalid input format</string>
     <string name="activity_main_error_empty_input_currency">There are no data about the currency you want to sell.</string>
     <string name="activity_main_error_empty_output_currency">There are no data on the currency you want to buy.</string>
-
+    <string name="activity_main_error_no_data">Exchange rates not found.</string>
 </resources>

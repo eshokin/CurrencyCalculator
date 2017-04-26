@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.currency_calculator">
+    package="com.example.calculator">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".CurrencyCalculatorApplication"
+        android:name=".CalculatorApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.activities.SplashActivity"
+            android:name="com.example.calculator.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,9 +21,8 @@
         </activity>
 
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name="com.example.calculator.MainActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
     </application>
